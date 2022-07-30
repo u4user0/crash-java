@@ -17,7 +17,7 @@ public class mainMethodDemo {
 		String[] array={"hey"};
 		B.main(array);//by array
 		A.main();//but variable length args is important (...)
-                //variable length argument from JDK 1.5 
+                //VarArgs or variable length argument from JDK version: 1.5 
 	}
 
 }
