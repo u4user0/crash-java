@@ -1,0 +1,137 @@
+//ਇਹ code Blank pdf create ਕਰਕੇ ਉਸ ਵਿੱਚ Blank page add ਕਰਨ ਦਾ code ਹੈ।
+
+PDDocument document = new PDDocument(); 
+
+PDPage firstPage = new PDPage(); // ਸਭ ਤੋਂ ਪਹਿਲਾਂ blank page pdf create ਹੋਈ ਸੀ ਤੇ ਉਹ open ਨਹੀਂ ਹੁੰਦੀ bcoz ਉਹ blank ਸੀ।
+
+document.addPage(firstPage);//blank page pdf ਤੇ ਆਪਾ page add ਕੀਤਾ।
+
+document.save("/storage/emulated/0/my-java/pdf-Project/src/main/java/heyBhalu.pdf");
+
+System.out.println("done");
+
+document.close();
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+//ਇਹ code pdf ਨੂੰ merge ਕਰਨ ਦਾ code ਹੈ।
+
+File oldFile= new File("/storage/emulated/0/my-java/pdf-Project/src/main/java/2-page.pdf");
+
+PDDocument document = PDDocument.load(oldFile);
+
+PDPage firstPage = new PDPage();
+
+document.addPage(firstPage);
+
+//ਇਹ ਉੱਪਰ ਵਾਲੀਆਂ 2 lines ਦੀ ਲੋੜ ਹੀ ਨਹੀਂ 
+
+//if we use this code
+
+document.addPage(new PDPage());
+
+document.save("/storage/emulated/0/my-java/pdf-Project/src/main/java/heyBhalu.pdf");
+
+System.out.println("done");
+
+document.close();
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+//ਇਸ ex ਦੇ ਵਿੱਚ ਆਪਾ extract ਕਰਾਗੇ page
+
+		File oldFile = new File("/storage/emulated/0/my-java/pdf-Project/src/main/java/imdb-report.pdf");		PDDocument document = PDDocument.load(oldFile);
+
+		Splitter splitter = new Splitter();
+
+		List <PDDocument> splitPages = splitter.split(document);
+
+		int num = 1;
+
+		for (PDDocument myDoc : splitPages) {
+
+			myDoc.save("/storage/emulated/0/my-java/pdf-Project/src/main/java/split/page" + num + ".pdf");
+
+			num++;
+
+			myDoc.close();
+
+		}
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+//ਇਸ ex ਦੇ ਵਿੱਚ ਆਪਾ range of pages extract ਕਰਾਗੇ
+
+	File oldFile = new File("/storage/emulated/0/my-java/pdf-Project/src/main/java/imdb-report.pdf");
+
+		PDDocument document = PDDocument.load(oldFile);
+
+		File fileDes = new File("/storage/emulated/0/my-java/pdf-Project/src/main/java/split/extract");
+
+		fileDes.mkdirs();
+
+		Splitter splitter = new Splitter();
+
+		splitter.setStartPage(2);
+
+		splitter.setEndPage(4);
+
+List <PDDocument> splitPages = splitter.split(document);
+
+		PDDocument newDoc = new PDDocument();
+
+		for (PDDocument myDoc : splitPages) {
+
+			newDoc.addPage(myDoc.getPage(0));
+
+		}
+
+		newDoc.save(fileDes+"/jage.pdf");
+
+		newDoc.close();
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+//Remove a single page from pdf
+
+		File oldFile = new File("/storage/emulated/0/my-java/pdf-Project/src/main/java/imdb-report.pdf");
+
+		PDDocument document = PDDocument.load(oldFile);
+
+		File fileDes = new File("/storage/emulated/0/my-java/pdf-Project/src/main/java/split");
+
+		fileDes.mkdirs();
+
+		document.removePage(4);
+
+		document.save(fileDes+"/rmDoc.pdf");
+
+		System.out.println("Done!..");
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+//Remove page in range from pdf
+
+File oldFile = new File("/storage/emulated/0/my-java/pdf-Project/src/main/java/imdb-report.pdf");
+
+		PDDocument document = PDDocument.load(oldFile);
+
+		File fileDes = new File("/storage/emulated/0/my-java/pdf-Project/src/main/java/split");
+
+		fileDes.mkdirs();
+
+		int pageRangeStart =2;
+
+		int pageRangeEnd =5;
+
+		for(int i = pageRangeEnd; i>= pageRangeStart ; i-- ){
+
+		document.removePage(i-1);
+
+	}
+
+		document.save(fileDes+"/rangeRmDoc.pdf");
+
+		System.out.println("Done!..");
+
+_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
